@@ -6,12 +6,12 @@ Check the validity of an AWS CloudFormation template.
 
 Currently checked items:
 
-<u>Parameters Section</u>:
+<ins>Parameters Section</ins>:
 
 - Do the parameters defined in the input_params.json file cover the Parameters defined in the template?
 
 
-<u>Resources Section</u>:
+<ins>Resources Section</ins>:
 
 
 - Are all template resource types valid CloudFormation resources?
