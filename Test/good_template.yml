@@ -1,0 +1,14 @@
+Parameters:
+    Param1:
+        Type: String
+    Param2:
+        Type: String
+Resources:
+    ECSCluster:
+        Type: AWS::ECS::Cluster
+        Properties:
+            ClusterName: cluster-name
+    ECSservice:
+        Type: AWS::ECS::Service
+        Properties:
+            TaskDefinition: task-def-name
