@@ -124,10 +124,6 @@ def verify_all_template_resources_have_valid_properties(
                       'Exiting further checks on this resource', '', sep='\n')
                 continue
 
-            spec_resource_properties = \
-                resource_specifications[
-                    'ResourceTypes'][resource['Type']]['Properties'].keys()
-
             if property_name not in spec_resource_properties:
                 # String: AWS::EC2::Instance.ImageId
                 resource_property_identifier = \
