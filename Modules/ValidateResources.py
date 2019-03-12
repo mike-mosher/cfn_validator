@@ -109,21 +109,21 @@ def verify_all_template_resources_have_valid_properties(
     template_resources_with_non_valid_properties = []
 
     for resource_name, resource in template['Resources'].items():
+
+        try:
+            spec_resource_properties = \
+                resource_specifications[
+                    'ResourceTypes'][resource['Type']]['Properties'].keys()
+        except KeyError as e:
+            # We are here because we tried to find the template resource type
+            # in the resource specification and we received a KeyError
+            # meaning that the resource type is not valid
+            print('Resource \'' + resource_name + '\' '
+                    'has an invalid type: \'' + resource['Type'] + '\'.  '
+                    'Exiting further checks on this resource', '', sep='\n')
+            continue
+
         for property_name, property in resource['Properties'].items():
-
-            try:
-                spec_resource_properties = \
-                    resource_specifications[
-                        'ResourceTypes'][resource['Type']]['Properties'].keys()
-            except KeyError as e:
-                # We are here because we tried to find the template resource
-                # type in the resource specification and we received a KeyError
-                # meaning that the resource type is not valid
-                print('Resource \'' + resource_name + '\' '
-                      'has an invalid type: \'' + resource['Type'] + '\'.  '
-                      'Exiting further checks on this resource', '', sep='\n')
-                continue
-
             if property_name not in spec_resource_properties:
                 # String: AWS::EC2::Instance.ImageId
                 resource_property_identifier = \
@@ -163,8 +163,8 @@ def verify_all_template_resources_have_required_properties(
             spec_resource_properties = resource_specifications[
                 'ResourceTypes'][resource['Type']]['Properties']
         except KeyError as e:
-            # We are here because we tried to find the template resource
-            # type in the resource specification and we received a KeyError
+            # We are here because we tried to find the template resource type
+            # in the resource specification and we received a KeyError
             # meaning that the resource type is not valid
             print('Resource \'' + resource_name + '\' '
                     'has an invalid type: \'' + resource['Type'] + '\'.  '
