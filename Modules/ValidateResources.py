@@ -119,8 +119,8 @@ def verify_all_template_resources_have_valid_properties(
             # in the resource specification and we received a KeyError
             # meaning that the resource type is not valid
             print('Resource \'' + resource_name + '\' '
-                    'has an invalid type: \'' + resource['Type'] + '\'.  '
-                    'Exiting further checks on this resource', '', sep='\n')
+                  'has an invalid type: \'' + resource['Type'] + '\'.  '
+                  'Exiting further checks on this resource', '', sep='\n')
             continue
 
         for property_name, property in resource['Properties'].items():
@@ -151,6 +151,7 @@ def verify_all_template_resources_have_required_properties(
         template {dict} -- CloudFormation template
         resource_specifications {dict} -- Resource Specification json object
     """
+
     print_header('Verify All Template Resources have Required Properties')
 
     required_resource_properties_missing_from_template = []
@@ -167,8 +168,8 @@ def verify_all_template_resources_have_required_properties(
             # in the resource specification and we received a KeyError
             # meaning that the resource type is not valid
             print('Resource \'' + resource_name + '\' '
-                    'has an invalid type: \'' + resource['Type'] + '\'.  '
-                    'Exiting further checks on this resource', '', sep='\n')
+                  'has an invalid type: \'' + resource['Type'] + '\'.  '
+                  'Exiting further checks on this resource', '', sep='\n')
             continue
 
         spec_resource_required_properties = []
