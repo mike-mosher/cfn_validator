@@ -3,6 +3,23 @@ import yaml
 import json
 
 
+def print_header(msg):
+    """
+    Print out the section header
+    Should look like this:
+
+    Verify All Template Resource Types are Valid:
+    --------------------------------------------
+
+    Arguments:
+        msg {string} -- sting to display
+    """
+
+    msg = msg + ':'
+    underline = '-' * len(msg)
+    print('', '', msg, underline, '', sep='\n')
+
+
 def parse_cfn_template_file(template_filename):
     """
     Take template filename that contains yaml or json data, and return
@@ -66,3 +83,19 @@ def parse_input_params_file(input_params_filename):
 
     return {param['ParameterKey']: param['ParameterValue']
             for param in input_params}
+
+
+def verify_template_description_not_exceed_limit(template):
+    """
+    Verify that the template description does not exceed the maximum of 1,024 bytes
+
+    Arguments:
+        template {json} -- CloudFormation template in json or yaml
+    """
+
+    print_header('Verify Template Description Does Not Exceed the Limit')
+
+    if len(template.get('Desription', '').encode('utf-8')) > 1024:
+        print('Template description is longer than the limit of 1024 bytes')
+    else:
+        print('No Issues')

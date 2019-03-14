@@ -68,6 +68,10 @@ def main():
     input_params = ValidateTemplate.parse_input_params_file(
         input_params_filename)
 
+    # Validate Template Section
+    print_header('Validate Template Section')
+    ValidateTemplate.verify_template_description_not_exceed_limit(template)
+
     # Validate Parameters Section
     print_header('Validate Parameters Section')
 

@@ -1,0 +1,19 @@
+Parameters:
+    Param1:
+        Type: String
+    Param2:
+        Type: String
+Resources:
+    resource-with-non-valid-type:
+        Type: AWS::ECS::Services
+        Properties:
+            TaskDefinition: task-def-name
+    resource-with-non-valid-property:
+        Type: AWS::ECS::Service
+        Properties:
+            TaskDefinition: task-def-name
+            TaskDefinitions: task-def-name
+    resource-without-required-property:
+        Type: AWS::ECS::Service
+        Properties:
+            ServiceName: name-of-service
