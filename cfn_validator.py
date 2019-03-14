@@ -10,24 +10,32 @@ region = 'us-west-2'
 def get_command_line_arguments_or_exit():
     """
     Get the command line arguments passed to the python script.
-    If there are less than 2 arguments passed to the script then
+    If there are less than 1 or more than 2 arguments passed to the script then
     we will print a help-like output and exit.
 
     input example:
-    python main.py <cfn_template_filename> <input_parameter_filename>
+    python main.py <cfn_template_filename> [input_parameter_filename]
 
     Returns
         string, string -- filenames for cfn_template and input_params files
     """
 
-    if len(sys.argv) < 3:
+    cfn_template_filename = ''
+    input_params_filename = ''
+    num_arguments_provided = len(sys.argv)
+
+    if num_arguments_provided == 2:
+        cfn_template_filename = sys.argv[1]
+
+    if num_arguments_provided == 3:
+        cfn_template_filename = sys.argv[1]
+        input_params_filename = sys.argv[2]
+
+    if num_arguments_provided < 2 or num_arguments_provided > 3:
         print("usage: python " +
               sys.argv[0] +
-              " <cfn_template_filename> <input_parameter_filename>")
+              " <cfn_template_filename> [input_parameter_filename]")
         exit()
-
-    cfn_template_filename = sys.argv[1]
-    input_params_filename = sys.argv[2]
 
     return cfn_template_filename, input_params_filename
 

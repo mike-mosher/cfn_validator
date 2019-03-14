@@ -29,6 +29,7 @@ def parse_cfn_template_file(template_filename):
 def parse_input_params_file(input_params_filename):
     """
     Take the input_params.json file and parse the contents to json
+    If no input_params_file provided, then return nothing
 
     We also need to reformat the file before returning:
 
@@ -50,11 +51,15 @@ def parse_input_params_file(input_params_filename):
     }
 
     Arguments:
-        input_params_filename {[type]} -- [description]
+        input_params_filename {string} -- name of input_params.json file
 
     Returns:
-        [type] -- [description]
+        [json] -- If input_param_filename -> return contents.  If not
+        input_param_filename, return None
     """
+
+    if not input_params_filename:
+        return None
 
     with open(input_params_filename) as f:
         input_params = json.loads(f.read())

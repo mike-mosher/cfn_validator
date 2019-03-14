@@ -26,6 +26,9 @@ def verify_all_template_params_provided_by_input_params(
     parameters that are defined in the template, but it is *not* fine
     if it defines *less* parameters
 
+    if input_params_filename not provided to the script, we will skip this
+    test and exit function
+
     Arguments:
         template_params {dict} -- CloudFormation template dict
         input_params {dict} -- input_params.json dict
@@ -33,6 +36,10 @@ def verify_all_template_params_provided_by_input_params(
 
     print_header('Verify All Template Parameters are Provided by the '
                  'input_params.json File')
+
+    if not input_params:
+        print('\'input_parameter_filename\' not provided.  Exiting.')
+        return
 
     # Subtracting the input params from the template params
     # will give an empty set if the input params
